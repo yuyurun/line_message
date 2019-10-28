@@ -13,7 +13,7 @@ import os
 
 app = Flask(__name__)
 
-# 環境変数取得
+# 環境変数
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
@@ -23,6 +23,11 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    """
+    webhookからのrequestをチェック
+
+    """
+
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
@@ -41,9 +46,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    """
+    messageを受け取ったときの処理
+
+    """
+
     if event.reply_token == "00000000000000000000000000000000":
         return
 
+    # 受け取ったテキストを返す
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))

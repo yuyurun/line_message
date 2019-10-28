@@ -11,11 +11,22 @@ from linebot.models import (
 )
 import os
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
 app = Flask(__name__)
 
 # 環境変数
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+REMOTE_HOST = CONF_DATA['REMOTE_HOST']
+REMOTE_DB_NAME = CONF_DATA['REMOTE_DB_NAME']
+REMOTE_DB_USER = CONF_DATA['REMOTE_DB_USER']
+REMOTE_DB_PASS = CONF_DATA['REMOTE_DB_PASS']
+REMOTE_DB_TB = CONF_DATA['REMOTE_DB_TB']
+
+
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)

@@ -73,7 +73,7 @@ def make_gokan_dic(gokan):
     if len(gokan) == 0:
         return False
     gokan_dic = {}
-    with open('../data/gokan.csv') as f:
+    with open('data/gokan.csv') as f:
         reader = csv.reader(f)
         for row in reader:
             gokan_dic[row[0]] = row[1]

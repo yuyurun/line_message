@@ -45,6 +45,7 @@ def parse(text, access_token):
     r_type = requests.post(base_url + "v1/sentence_type",
                            headers=headers,
                            data=json.dumps(data))
+    print(r.json(), r_type.json())
     return r.json(), r_type.json()
 
 

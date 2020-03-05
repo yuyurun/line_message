@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import os
 import requests
 import json
 
 import csv
 
 
-
-def auth():
+def auth(CLIENT_ID, CLIENT_SECRET):
     headers = {
         "Content-Type": "application/json",
         "charset": "UTF-8"
@@ -56,16 +54,18 @@ def judge_directive(res):
         directive = True
     return directive
 
-def convert(r_parse,r_type):
+
+def convert(r_parse, r_type):
     response = 'んんん？'
     if judge_directive(r_type):
         for word in r_parse["result"]:
             for token in word["tokens"]:
                 nai = make_gokan_dic(token['features'])
                 if token['pos'] == '動詞語幹' and nai != False:
-                        response = token['form'] + nai + 'たくな〜〜い！'
+                    response = token['form'] + nai + 'たくな〜〜い！'
 
     return response
+
 
 def make_gokan_dic(gokan):
     if len(gokan) == 0:
@@ -75,15 +75,14 @@ def make_gokan_dic(gokan):
         reader = csv.reader(f)
         for row in reader:
             gokan_dic[row[0]] = row[1]
-    for k,v in gokan_dic.items():
+    for k, v in gokan_dic.items():
         if gokan[0] == k:
             return v
         else:
             return False
 
 
-
-def trans(text):
-    access_token = auth()
+def trans(text, C_ID, C_TOKEN):
+    access_token = auth(C_ID, C_TOKEN)
     r_parse, r_type = parse(text, access_token)
     return convert(r_parse, r_type)

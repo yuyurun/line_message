@@ -11,6 +11,8 @@ from linebot.models import (
 )
 import os
 
+from cotoha import trans
+
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -68,7 +70,7 @@ def handle_message(event):
     # 受け取ったテキストを返す
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=trans(event.message.text)))
 
 
 if __name__ == "__main__":

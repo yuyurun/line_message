@@ -20,11 +20,12 @@ def auth(CLIENT_ID, CLIENT_SECRET):
     r = requests.post('https://api.ce-cotoha.com/v1/oauth/accesstokens',
                       headers=headers,
                       data=json.dumps(data))
+    print(r.json())
     return r.json()["access_token"]
 
 
 def parse(text, access_token):
-    base_url = 'https://api.ce-cotoha.com/api/dev/'
+    base_url = 'https://api.ce-cotoha.com/api/dev/nlp/'
     headers = {
         "Content-Type": "application/json",
         "charset": "UTF-8",

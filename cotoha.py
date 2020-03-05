@@ -3,16 +3,13 @@
 import os
 import requests
 import json
-from dotenv import load_dotenv
 
 import csv
 
-dotenv_path = '../.env'
-load_dotenv(dotenv_path)
-CLIENT_ID = os.environ.get("CLIENT_ID")
-CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-DEVELOPER_API_BASE_URL = os.environ.get("DEVELOPER_API_BASE_URL")
-ACCESS_TOKEN_PUBLISH_URL = os.environ.get("ACCESS_TOKEN_PUBLISH_URL")
+CLIENT_ID = os.environ["CLIENT_ID"]
+CLIENT_SECRET = os.environ["CLIENT_SECRET"]
+DEVELOPER_API_BASE_URL = os.environ["DEVELOPER_API_BASE_URL"]
+ACCESS_TOKEN_PUBLISH_URL = os.environ["ACCESS_TOKEN_PUBLISH_URL"]
 
 
 def auth():

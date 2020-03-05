@@ -6,10 +6,6 @@ import json
 
 import csv
 
-CLIENT_ID = os.environ["CLIENT_ID"]
-CLIENT_SECRET = os.environ["CLIENT_SECRET"]
-DEVELOPER_API_BASE_URL = os.environ["DEVELOPER_API_BASE_URL"]
-ACCESS_TOKEN_PUBLISH_URL = os.environ["ACCESS_TOKEN_PUBLISH_URL"]
 
 
 def auth():
@@ -23,14 +19,14 @@ def auth():
         "clientId": CLIENT_ID,
         "clientSecret": CLIENT_SECRET
     }
-    r = requests.post(ACCESS_TOKEN_PUBLISH_URL,
+    r = requests.post('https://api.ce-cotoha.com/v1/oauth/accesstokens',
                       headers=headers,
                       data=json.dumps(data))
     return r.json()["access_token"]
 
 
 def parse(text, access_token):
-    base_url = DEVELOPER_API_BASE_URL
+    base_url = 'https://api.ce-cotoha.com/api/dev/'
     headers = {
         "Content-Type": "application/json",
         "charset": "UTF-8",

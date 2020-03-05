@@ -22,6 +22,11 @@ app = Flask(__name__)
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
+
+CLIENT_ID = os.environ["CLIENT_ID"]
+CLIENT_SECRET = os.environ["CLIENT_SECRET"]
+
+
 REMOTE_HOST = CONF_DATA['REMOTE_HOST']
 REMOTE_DB_NAME = CONF_DATA['REMOTE_DB_NAME']
 REMOTE_DB_USER = CONF_DATA['REMOTE_DB_USER']
@@ -70,7 +75,7 @@ def handle_message(event):
     # 受け取ったテキストを返す
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=trans(event.message.text)))
+        TextSendMessage(text=trans(event.message.text,CLIENT_ID,CLIENT_SECRET)))
 
 
 if __name__ == "__main__":

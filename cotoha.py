@@ -80,8 +80,7 @@ def make_gokan_dic(gokan):
     for k, v in gokan_dic.items():
         if gokan[0] == k:
             return v
-        else:
-            return False
+    return False
 
 
 def trans(text, C_ID, C_TOKEN):

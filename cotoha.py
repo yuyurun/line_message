@@ -51,22 +51,22 @@ def parse(text, access_token):
     return r.json(), r_type.json()
 
 
-def judge_directive(res):
-    directive = False
-    if res["result"]['dialog_act'] == ['directive']:
-        directive = True
-    return directive
-
-
 def convert(r_parse, r_type):
     response = ''
-    if judge_directive(r_type):
+    if r_type["result"]['dialog_act'] == ['directive']:
         for word in r_parse["result"]:
             for token in word["tokens"]:
                 nai = make_gokan_dic(token['features'])
                 if token['pos'] == '動詞語幹' and nai != False:
                     response = token['form'] + nai + 'たくな〜〜い！'
-
+    elif r_type["result"]['dialog_act'] == ['information-providing']:
+        f = ''
+        for word in r_parse["result"]:
+            for token in word["tokens"]:
+                if token['pos'] == '動詞語幹':
+                    f = token['lemma']
+                elif token['form'] == 'う' and token['form'] == '動詞接尾辞' and len(f) > 0:
+                    response = f
     return response
 
 

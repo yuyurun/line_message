@@ -86,7 +86,7 @@ def make_gokan_dic(gokan):
 
 def trans(text, C_ID, C_TOKEN):
     access_token = auth(C_ID, C_TOKEN)
-    res_list = ['んんん？','わかんない…','うーんと','( ；ᵕ； )','もういっかい…']
+    res_list = ['んんん？','わかんない…','うーんと','( ；ᵕ； )']
 
     if len(text) > 15:
         response = random.choice(res_list)

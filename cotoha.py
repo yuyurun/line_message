@@ -4,7 +4,7 @@ import requests
 import json
 
 import csv
-import ramdom
+import random
 
 
 def auth(CLIENT_ID, CLIENT_SECRET):
@@ -89,10 +89,10 @@ def trans(text, C_ID, C_TOKEN):
     res_list = ['んんん？','わかんない…','うーんと','( ；ᵕ； )','もういっかい…']
 
     if len(text) > 15:
-        response = ramdom.choice(res_list)
+        response = random.choice(res_list)
     else:
         r_parse, r_type = parse(text, access_token)
         response = convert(r_parse, r_type)
         if response == '':
-            response = ramdom.choice(res_list)
+            response = random.choice(res_list)
     return response

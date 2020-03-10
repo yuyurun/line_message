@@ -66,7 +66,7 @@ def convert(r_parse, r_type):
                 if token['pos'] == '動詞語幹':
                     f = token['lemma']
                     print(f)
-                elif token['form'] == 'う' and token['form'] == '動詞接尾辞' and len(f) > 0:
+                elif token['form'] == 'う' and token['pos'] == '動詞接尾辞' and len(f) > 0:
                     response = f + '!!'
     return response
 

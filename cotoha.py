@@ -58,7 +58,7 @@ def judge_directive(res):
 
 
 def convert(r_parse, r_type):
-    response = 'んんん？'
+    response = ''
     if judge_directive(r_type):
         for word in r_parse["result"]:
             for token in word["tokens"]:
@@ -85,5 +85,13 @@ def make_gokan_dic(gokan):
 
 def trans(text, C_ID, C_TOKEN):
     access_token = auth(C_ID, C_TOKEN)
-    r_parse, r_type = parse(text, access_token)
-    return convert(r_parse, r_type)
+    res_list = ['んんん？','わかんない…','うーんと','( ；ᵕ； )','もういっかい…']
+
+    if len(text) > 15:
+        response = ramdom.choice(res_list)
+    else:
+        r_parse, r_type = parse(text, access_token)
+        response = convert(r_parse, r_type)
+        if response == '':
+            response = ramdom.choice(res_list)
+    return response

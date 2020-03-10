@@ -53,12 +53,13 @@ def parse(text, access_token):
 
 def convert(r_parse, r_type):
     response = ''
+    res_list = ['たくなーい！','たくないよ(｀ε´*)','たくない！','たくないもん']
     if r_type["result"]['dialog_act'] == ['directive']:
         for word in r_parse["result"]:
             for token in word["tokens"]:
                 nai = make_gokan_dic(token['features'])
                 if token['pos'] == '動詞語幹' and nai != False:
-                    response = token['form'] + nai + 'たくな〜〜い！'
+                    response = token['form'] + nai + random.choice(res_list)
     elif r_type["result"]['dialog_act'] == ['information-providing']:
         f = ''
         for word in r_parse["result"]:
